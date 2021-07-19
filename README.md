@@ -1,11 +1,13 @@
 ### 1.webpack以及其打包流程
   ##### webpack是一个模块打包工具（es module模块，commonjs，cmd，amd都可以识别），最开始是js模块打包工具，现在可以打包各种模块
-
+Webpack的工作方式是：把你的项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个浏览器可识别的JavaScript文件。
+在webpack看来一切都是模块！这就是它不可不说的优点，包括你的JavaScript代码，也包括CSS和fonts以及图片等等等，只有通过合适的loaders，它们都可以被当做模块被处理。 
 ### 2.webpack项目的初始化以及webpack的配置
 ```
  npm init//项目初始化
  npm install webpack webpack-cli -g  //全局安装webpack和webpack-cli，webpack-cli是为了可以在命令行里可以运行webpack
  npm install webpack@版本号 webpack-cli -D //在项目中安装webpack
+ npm info webpack //查看 webpack 所有信息
  npx webpack entry文件 //npx可以启动项目目录下nodemodules下的webpack
  npx webpack —config webpack的入口文件 //--config可以指定wepack的入口文件
 ```
@@ -31,6 +33,10 @@
 ##### sass-loader将sass代码转译为浏览器可以识别的CSS代码
 ##### css-loader主要是解析css文件中的@import和url语句，处理css-modules，并将结果作为一个js模块返回
 ##### 经过css-loader的转译，我们已经得到了完整的css样式代码，style-loader的作用就是将结果以style标签的方式插入DOM树中
+SCSS 源代码会先移交给 sass-loader 把 SCSS 转换成 CSS；
+把 sass-loader 输出的 CSS 交给css-loader 处理，找出 CSS 中依赖的资源、压缩 CSS 等；
+把 css-loader 输出的 CSS 交给 style-loader 处理，转换成通过脚本加载的 JavaScript 代码；
+
 ##### postcss-loader 可以使用autoprefixer自动添加浏览器厂商前缀，需要和package.json里的browserslist一起使用(npx browserslist可以查看选择了哪些浏览器),在 css-loader 和 style-loader 之前使用它，但是在其他预处理器（例如：sass|less|stylus-loader）之后使用
 
 ### 6.实现css-loader，style-loader, sass-loader
